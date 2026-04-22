@@ -2,9 +2,8 @@
 
 require "../Transaction.php";
 
-$amount = (new Transaction(100, "Transaction"))
+$transaction = (new Transaction(100))
     ->addTax(8)
-    ->applyDiscount(10)
-    ->getAmount();
+    ->applyDiscount(10);
 
-var_dump($amount);
+var_dump($transaction->getAmount(), $transaction->getDescription());
