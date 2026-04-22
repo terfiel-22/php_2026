@@ -1,0 +1,31 @@
+services: 
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: php_2026-app
+    restart: always
+    working_dir: /var/www
+    volumes:
+      - ../:/var/www
+  
+  nginx:
+    image: nginx:1.29.8-alpine 
+    container_name: php_2026-nginx
+    restart: always
+    ports: 
+      - 8000:80
+    volumes:
+      - ../:/var/www
+      - ./nginx:/etc/nginx/conf.d
+
+  db:
+    image: mysql:8.0
+    container_name: php_2026-db
+    restart: always
+    ports: 
+      - 3306:3306
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
