@@ -1,7 +1,10 @@
 <?php
 
-phpinfo();
+require "../Transaction.php";
 
-echo "<pre>";
-var_dump($_SERVER);
-echo "</pre>";
+$amount = (new Transaction(100, "Transaction"))
+    ->addTax(8)
+    ->applyDiscount(10)
+    ->getAmount();
+
+var_dump($amount);
