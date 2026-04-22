@@ -1,8 +1,13 @@
 <?php
 
-require "../Transaction.php";
+use App\PaymentGateway\Paddle\Transaction;
 
-$transaction = (new Transaction(100))
+spl_autoload_register(function ($class) {
+    $path = __DIR__ . "/../" . lcfirst(str_replace("\\", "/", $class)) . ".php";
+    require $path;
+});
+
+$transaction = (new Transaction(100, "Transaction"))
     ->addTax(8)
     ->applyDiscount(10);
 
